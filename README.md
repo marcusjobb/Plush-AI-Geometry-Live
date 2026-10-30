@@ -74,6 +74,13 @@ bevis på att rapporten inte bryr sig om vilka former den får.
 
 - `Guard.cs` finns för att sidor och radier måste vara positiva — samma regel i
   tre klasser. Det är delad kunskap, inte bara likadan kod.
+- `Circle.Radius`, `Rectangle.Width`, `Rectangle.Height` och `Triangle.A/B/C` är
+  publika med flit, fast ingen kod utanför klasserna läser dem. De är formens
+  identitet, kostar en rad var och syns i debuggern när en elev undrar vad hen
+  skapade. Det är ett medvetet undantag från YAGNI, inte glömska.
+- Mycket stora tal svämmar över: `new Circle(1e200).Area` blir oändligt. Inget
+  skydd finns, och det är ett rimligt val för ett demo — men det står här i
+  stället för att upptäckas av en elev.
 - `Triangle.Area` använder Herons formel. Triangelolikheten i konstruktorn gör att
   uttrycket under roten aldrig kan bli negativt — det är därför det inte finns
   någon `Math.Max(0, ...)` där. Mutationstestning visade att en sådan klämma var

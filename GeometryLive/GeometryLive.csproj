@@ -5,6 +5,10 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <!-- Gör AGENTS.md-regeln "publika medlemmar ska ha XML-doc" mekanisk:
+         en odokumenterad publik medlem blir CS1591, och bygget körs med
+         -warnaserror i CI. -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
 </Project>

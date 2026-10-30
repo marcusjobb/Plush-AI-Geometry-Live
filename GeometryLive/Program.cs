@@ -1,7 +1,8 @@
 ﻿using GeometryLive;
 
 // Ett live-exempel: samma loop hanterar alla tre formerna, och den vet inte
-// vad de heter. Lägg till en Square i morgon — den här filen rörs inte.
+// vad de heter. Lägg till en Square i morgon — bara listan nedan behöver
+// ändras, loopen och rapporten rörs inte.
 
 IShape[] shapes =
 [
