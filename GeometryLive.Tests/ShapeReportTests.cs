@@ -75,21 +75,4 @@ public class ShapeReportTests
     {
         Assert.Throws<ArgumentNullException>(() => new ShapeReport(null!));
     }
-
-    /// <summary>
-    /// A shape that did not exist when <see cref="IShape"/> was written.
-    /// It slots in without a single change to <see cref="ShapeReport"/>.
-    /// </summary>
-    private sealed class Square : IShape
-    {
-        public Square(double side) => Side = Guard.Positive(side, nameof(side));
-
-        public double Side { get; }
-
-        public string Name => "Kvadrat";
-
-        public double Area => Side * Side;
-
-        public double Perimeter => 4 * Side;
-    }
 }

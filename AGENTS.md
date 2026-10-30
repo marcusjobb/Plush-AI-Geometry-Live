@@ -1,7 +1,7 @@
 # Geometri och interface
 
 ## Om projektet
-Ett litet live-exempel för C#: en `IShape` med tre implementationer, och en
+Ett litet live-exempel för C#: en `IShape` med fyra implementationer, och en
 rapport som räknar på dem utan att veta vilka de är.
 
 ## Teknik

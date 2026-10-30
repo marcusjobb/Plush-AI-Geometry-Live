@@ -9,15 +9,16 @@ Former
 Cirkel       area  28.27   omkrets  18.85
 Rektangel    area  24.00   omkrets  20.00
 Triangel     area   6.00   omkrets  12.00
+Kvadrat      area  25.00   omkrets  20.00
 
-Total area: 58.27
+Total area: 83.27
 Störst:     Cirkel
 ```
 
 ## Kör den
 
 ```bash
-dotnet test                                  # 46 tester
+dotnet test                                  # 58 tester
 dotnet run --project GeometryLive            # tabellen ovan
 ```
 
@@ -26,7 +27,7 @@ dotnet run --project GeometryLive            # tabellen ovan
 | Fil | Poängen |
 |---|---|
 | `IShape.cs` | Kontraktet: area, omkrets, namn. Inget mer. |
-| `Circle.cs`, `Rectangle.cs`, `Triangle.cs` | Varje form räknar på sig själv. Ingen annan vet hur. |
+| `Circle.cs`, `Rectangle.cs`, `Triangle.cs`, `Square.cs` | Varje form räknar på sig själv. Ingen annan vet hur. |
 | `ShapeReport.cs` | Summerar och hittar störst — utan en enda typkontroll. |
 | `Program.cs` | En loop över `IShape[]`. Den vet inte vad den skriver ut. |
 
@@ -48,7 +49,8 @@ fungerar. Med `IShape` är en ny form en ny fil, och ingenting annat rörs.
 
 ## Live-delen
 
-Be klassen skriva en kvadrat. Det tar tre minuter:
+`Square.cs` ligger i repot som facit — 27 rader, varav hälften kommentarer. Ta
+bort den och be klassen skriva den tillbaka:
 
 ```csharp
 public sealed class Square : IShape
@@ -63,21 +65,31 @@ public sealed class Square : IShape
 }
 ```
 
-Lägg den i `shapes` i `Program.cs` och kör. Ingenting annat ändras, ingen
-`switch`, ingen ny `if` i rapporten. Sedan `dotnet test` — 46 gröna, fast koden
-växte. Det är hela poängen.
+Lägg den sist i `shapes` i `Program.cs` och kör. Ingenting annat ändras, ingen
+`switch`, ingen ny `if` i rapporten. Sedan `dotnet test` — grönt, fast koden
+växte.
 
-`ShapeReportTests` innehåller redan en sådan kvadrat som privat testklass, som
-bevis på att rapporten inte bryr sig om vilka former den får.
+Nästa övning, när kvadraten sitter: en liksidig hexagon. Area `3 * sqrt(3) / 2
+* s * s`, omkrets `6 * s`. Samma tre steg — ny fil, `IShape`, in i listan — och
+fortfarande noll ändringar i `ShapeReport`.
+
+Frågan som avgör om de förstått det: *"Varför ärver `Square` inte från
+`Rectangle`, som har samma formler?"* Svar: `Rectangle` bär en bredd och en höjd
+som kan sättas olika, och en kvadrat som plötsligt har `Width = 3, Height = 7` är
+inte längre en kvadrat. Den ärver bara kontraktet.
 
 ## Noteringar för den som vill gräva
 
 - `Guard.cs` finns för att sidor och radier måste vara positiva — samma regel i
   tre klasser. Det är delad kunskap, inte bara likadan kod.
-- `Circle.Radius`, `Rectangle.Width`, `Rectangle.Height` och `Triangle.A/B/C` är
-  publika med flit, fast ingen kod utanför klasserna läser dem. De är formens
-  identitet, kostar en rad var och syns i debuggern när en elev undrar vad hen
-  skapade. Det är ett medvetet undantag från YAGNI, inte glömska.
+- `Circle.Radius`, `Rectangle.Width`, `Rectangle.Height`, `Square.Side` och
+  `Triangle.A/B/C` är publika med flit, fast ingen kod utanför klasserna läser
+  dem. De är formens identitet, kostar en rad var och syns i debuggern när en
+  elev undrar vad hen skapade. Det är ett medvetet undantag från YAGNI, inte
+  glömska.
+- `Square` implementerar `IShape` direkt i stället för att ärva `Rectangle`.
+  Arv hade gett den en `Width` och en `Height` som kan sättas olika — och då är
+  den inte längre en kvadrat. Kontrakt, inte arv.
 - Mycket stora tal svämmar över: `new Circle(1e200).Area` blir oändligt. Inget
   skydd finns, och det är ett rimligt val för ett demo — men det står här i
   stället för att upptäckas av en elev.

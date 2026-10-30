@@ -9,6 +9,7 @@ IShape[] shapes =
     new Circle(3),
     new Rectangle(6, 4),
     new Triangle(3, 4, 5),
+    new Square(5),
 ];
 
 Console.WriteLine("Former");
