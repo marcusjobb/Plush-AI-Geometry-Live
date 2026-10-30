@@ -1,0 +1,19 @@
+# Byggutdata
+bin/
+obj/
+TestResults/
+*.user
+*.suo
+
+# Coverage
+coverage*.xml
+coverage*.json
+coverage*.info
+
+# Editor
+.vs/
+.idea/
+.vscode/
+
+# OS
+.DS_Store

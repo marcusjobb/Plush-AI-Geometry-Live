@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="GeometryLive.Tests/GeometryLive.Tests.csproj" />
+  <Project Path="GeometryLive/GeometryLive.csproj" />
+</Solution>
